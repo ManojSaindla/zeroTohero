@@ -11,6 +11,7 @@ import com.employee.employee_management.entity.Employee;
 import com.employee.employee_management.service.EmployeeService;
 import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
+import com.employee.employee_management.dto.EmployeeRequest;
 
 
 @RestController
@@ -40,8 +41,8 @@ public Employee getEmployeeById(@PathVariable Long id){
 }
     
 @PostMapping
-public Employee createEmployee(@RequestBody Employee employee){
-    return employeeService.createEmployee(employee);
+public Employee createEmployee(@RequestBody EmployeeRequest request){
+    return employeeService.createEmployee(request);
 }
 
 @PutMapping("/{id}")

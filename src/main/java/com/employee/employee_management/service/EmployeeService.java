@@ -4,17 +4,28 @@ import com.employee.employee_management.entity.Employee;
 import org.springframework.stereotype.Service;
 import com.employee.employee_management.repository.EmployeeRepository;
 import java.util.List;
+import com.employee.employee_management.dto.EmployeeRequest;
 
 
 @Service 
 public class EmployeeService {
 
     private final EmployeeRepository employeeRepository;
+
+
+
     public EmployeeService(EmployeeRepository employeeRepository) {
         this.employeeRepository = employeeRepository;
+
     }
 
-    public Employee createEmployee(Employee employee) {
+    public Employee createEmployee(EmployeeRequest request){
+        Employee employee = new Employee();
+
+        employee.setName(request.getName());
+        employee.setEmail(request.getEmail());
+        employee.setSalary(request.getSalary()); 
+        
         return employeeRepository.save(employee);
     }
     public List<Employee> getAllEmployees(){
