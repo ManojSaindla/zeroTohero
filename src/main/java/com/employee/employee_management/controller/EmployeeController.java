@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import com.employee.employee_management.entity.Employee;
 import com.employee.employee_management.service.EmployeeService;
+
+import jakarta.validation.Valid;
+
 import java.util.List;
 import org.springframework.web.bind.annotation.PutMapping;
 import com.employee.employee_management.dto.EmployeeRequest;
@@ -41,7 +44,7 @@ public Employee getEmployeeById(@PathVariable Long id){
 }
     
 @PostMapping
-public Employee createEmployee(@RequestBody EmployeeRequest request){
+public Employee createEmployee(@Valid  @RequestBody EmployeeRequest request){
     return employeeService.createEmployee(request);
 }
 
