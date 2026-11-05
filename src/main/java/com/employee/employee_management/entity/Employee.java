@@ -6,7 +6,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 
 
-
 @Entity
 @Table(name = "employees")
 public class Employee {
