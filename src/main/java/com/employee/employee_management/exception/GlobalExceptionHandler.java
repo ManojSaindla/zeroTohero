@@ -1,19 +1,31 @@
 package com.employee.employee_management.exception;
 
+import com.employee.employee_management.dto.ErrorResponse;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import java.time.LocalDateTime;
 
 @RestControllerAdvice 
 public class GlobalExceptionHandler  {
 
     @ExceptionHandler(EmployeeNotFoundException.class)
-    public ResponseEntity<String> handleEmployeeNotFound(EmployeeNotFoundException exception)
+    public ResponseEntity<ErrorResponse> handleEmployeeNotFound(EmployeeNotFoundException exception)
+   
     {
+
+        ErrorResponse errorResponse = new ErrorResponse(
+            LocalDateTime.now(),
+            HttpStatus.NOT_FOUND.value(),   
+            HttpStatus.NOT_FOUND.getReasonPhrase(),
+            exception.getMessage()
+        );   
+
         return ResponseEntity
         .status(HttpStatus.NOT_FOUND)
-        .body(exception.getMessage());
+        .body(errorResponse);
     }
     
 }
