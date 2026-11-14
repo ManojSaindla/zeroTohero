@@ -1,5 +1,7 @@
 package com.employee.employee_management.controller;
 
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -44,8 +46,9 @@ public Employee getEmployeeById(@PathVariable Long id){
 }
     
 @PostMapping
-public Employee createEmployee(@Valid  @RequestBody EmployeeRequest request){
-    return employeeService.createEmployee(request);
+public ResponseEntity<Employee> createEmployee(@Valid  @RequestBody EmployeeRequest request){
+    Employee employee = employeeService.createEmployee(request);
+    return ResponseEntity.status(HttpStatus.CREATED).body(employee);
 }
 
 @PutMapping("/{id}")
